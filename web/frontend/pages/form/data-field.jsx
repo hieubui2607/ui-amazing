@@ -1,134 +1,183 @@
 import {
   Page,
   Tabs,
-  ButtonGroup,
-  Button,
-  PageActions,
   TextField,
-  ChoiceList,
+  DropZone,
+  Select,
   Checkbox,
-  RadioButton,
-  Layout,
-  FormLayout,
   Icon,
 } from "@shopify/polaris";
-import { QuestionMarkInverseMinor } from "@shopify/polaris-icons";
-import React, { useState, useCallback, Children } from "react";
+import {
+  AddMajor,
+  EditMajor,
+  DeleteMajor,
+  ChevronDownMinor,
+} from "@shopify/polaris-icons";
+import React, { useState, useCallback } from "react";
+import { AmazingBarCT, OptionSetsForm, ResourceBar,  } from "../../components/customization-options";
 
-function OptionSet({ children }) {
+
+
+function ResourceTabel() {
   return (
-    <Page
-      breadcrumbs={[{ content: "Home", url: "#" }]}
-      title="New option set"
-      divider
-      primaryAction={
-        <ButtonGroup>
-          <Button>Exit without save</Button>
-          <div style={{ color: "#00a0ac" }}>
-            <Button monochrome outline>
-              Condition
-            </Button>
-          </div>
-          <div style={{ color: "#2c88d9" }}>
-            <Button monochrome outline>
-              Preview
-            </Button>
-          </div>
-          <div>
-            <Button
-              primary
-              connectedDisclosure={{
-                accessibilityLabel: "Other save actions",
-                actions: [{ content: "Save as draft" }],
-              }}
-            >
-              Save
-            </Button>
-          </div>
-          <div></div>
-        </ButtonGroup>
-      }
-    >
-      {children}
-    </Page>
-  );
-}
-
-function OptionSetsForm() {
-  const [value, setValue] = useState("disabled");
-
-  const handleChange = useCallback(
-    (_checked, newValue) => setValue(newValue),
-    []
-  );
-  return (
-    <Page fullWidth>
-      <div>
+    <ResourceBar>
+      <div style={{ margin: "20px 0" }}>
         <div
           style={{
             display: "inline-flex",
             fontWeight: "700",
-            fontSize: "18px",
             gap: "10px",
           }}
         >
-          <p>Preview type</p>
-          <Icon source={QuestionMarkInverseMinor} color="primary" />
+          <p>Data Input</p>
         </div>
-        <i style={{ display: "block", color: "#545454" }}>
-          Add preview image for the item
-        </i>
-        <div
+        <i
           style={{
-            display: "inline-flex",
-            padding: "1rem 0",
-            gap: "2rem",
-            fontWeight: "700",
-            fontSize: "15px",
+            display: "block",
+            color: "#545454",
+            fontSize: "11px",
+            fontWeight: "400",
           }}
         >
-          <RadioButton
-            label="Product thumbnail"
-            checked={value === "disabled"}
-            id="disabled"
-            name="accounts"
-            onChange={handleChange}
-          />
-          <RadioButton
-            label="Custom"
-            checked={value === "disabled"}
-            id="disabled"
-            name="accounts"
-            onChange={handleChange}
-          />
-        </div>
+          Enter the specifics of your printing capabilities for text
+        </i>
       </div>
-      <FormLayout> 
-        <FormLayout.Group>
-          <div style={{ Gap: '10px'}}>
-            <TextField
-              label="Label *"
-              // value={value}
-              // onChange={handleChange}
-              autoComplete="off"
-              placeholder="Information Customized"
-              helpText="You have 78 of 100 characters remaining"
+      <Checkbox
+        label="Make this required for buyer"
+        checked={true}
+        // onChange={handleChange}
+      />
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 2.5fr",
+          gap: "10px",
+        }}
+      >
+        <TextField
+          label="Label*"
+          type="text"
+          // value={textFieldValue}
+          // onChange={handleTextFieldChange}
+          placeholder="Sender's Line"
+          helpText={<i>You have 78 of 100 charaters remaining</i>}
+        />
+        <TextField
+          label="Instructions (Optional)"
+          type="text"
+          // value={textFieldValue}
+          // onChange={handleTextFieldChange}
+          placeholder="Instructions"
+          helpText={<i>You have 182 of 200 charaters remaining</i>}
+        />
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "5fr 5fr 1.5fr 3fr",
+          gap: "10px",
+        }}
+      >
+        <TextField
+          label="Label*"
+          type="text"
+          // value={textFieldValue}
+          // onChange={handleTextFieldChange}
+          placeholder="Sender's Line"
+          helpText={<i>You have 78 of 100 charaters remaining</i>}
+        />
+        <TextField
+          label="Instructions (Optional)"
+          type="text"
+          // value={textFieldValue}
+          // onChange={handleTextFieldChange}
+          placeholder="Instructions"
+          helpText={<i>You have 182 of 200 charaters remaining</i>}
+        />
+        <div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "10px",
+            }}
+          >
+            <Select
+              label="Min"
+              type="number"
+              options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+              // onChange={handleSelectTypeChange}
             />
-            <TextField
-              label="Instructions (Optional)"
-              // value={value}
-              // onChange={handleChange}
-              autoComplete="off"
-              placeholder="How to do it ^.^"
-              multiline={4}
-              helpText="You have 78 of 100 characters remaining"
+            <Select
+              label="Max"
+              type="number"
+              options={["1", "2", "3", "4", "5", "6", "7", "8", "9"]}
+              // onChange={handleSelectConditionChange}
             />
           </div>
+          <p
+            style={{
+              paddingTop: "5px",
+              color: "#6d7175",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <i>Character limitted</i>
+          </p>
+        </div>
+        <TextField
+          label="Lines of text allowed*"
+          type="number"
+          // error={isInvalid}
+          // id={textFieldID}
+          value="1"
+          // onChange={handleTextFieldValueChange}
+        />
+      </div>
+    </ResourceBar>
+  );
+}
 
-          <div />
-        </FormLayout.Group>
-      </FormLayout>
-    </Page>
+function DropZoneView() {
+  const [files, setFiles] = useState([]);
+
+  const handleDropZoneDrop = useCallback(
+    (_dropFiles, acceptedFiles, _rejectedFiles) =>
+      setFiles((files) => [...files, ...acceptedFiles]),
+    []
+  );
+
+  const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+
+  const fileUpload = !files.length && <DropZone.FileUpload />;
+  const uploadedFiles = files.length > 0 && (
+    <div style={{ padding: "0" }}>
+      <div>
+        {files.map((file, index) => (
+          <div key={index}>
+            <Thumbnail
+              size="small"
+              alt={file.name}
+              source={
+                validImageTypes.includes(file.type)
+                  ? window.URL.createObjectURL(file)
+                  : NoteMinor
+              }
+            />
+            <div>
+              {file.name} <p>{file.size} bytes</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <DropZone onDrop={handleDropZoneDrop}>
+      {uploadedFiles}
+      {fileUpload}
+    </DropZone>
   );
 }
 
@@ -183,9 +232,11 @@ export default function DataField() {
   return (
     <Page fullWidth divider>
       <Tabs tabs={tabs} selected={selected} onSelect={handleTabChange}>
-        <OptionSet>
+        <AmazingBarCT>
           <OptionSetsForm />
-        </OptionSet>
+          <ResourceTabel />
+          <DropZoneView />
+        </AmazingBarCT>
       </Tabs>
     </Page>
   );
